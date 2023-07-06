@@ -1,1 +1,1 @@
-wat2wasm demo.wat
+wat2wasm public\demo.wat
