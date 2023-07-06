@@ -1,0 +1,17 @@
+<script>
+
+;(async function(){
+
+var promise = await fetch('demo.wasm')
+var code = await promise.arrayBuffer()
+
+const wasm = await WebAssembly.compile(code);
+
+const instance = await WebAssembly.instantiate(wasm, {});
+
+instance.exports.start(instance);
+
+})();
+
+
+</script>
