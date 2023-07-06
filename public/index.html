@@ -9,7 +9,9 @@ const wasm = await WebAssembly.compile(code);
 
 const instance = await WebAssembly.instantiate(wasm, {});
 
-instance.exports.start(instance);
+var testa = instance.exports.addTwo(11);
+
+console.log(testa)
 
 })();
 
