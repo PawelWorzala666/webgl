@@ -1,17 +1,35 @@
-<script>
+<script type="module">
+
+    import WebGL from './test.js'
 
 ;(async function(){
 
-var promise = await fetch('demo.wasm')
-var code = await promise.arrayBuffer()
+//var promise = await fetch('demo.wasm')
+//var code = await promise.arrayBuffer()
 
-const wasm = await WebAssembly.compile(code);
 
-const instance = await WebAssembly.instantiate(wasm, {});
+var importObject = {
+    WebGL:{test:function test(num){
+    console.log('kaka')
+}},
+}
 
-var testa = instance.exports.addTwo(11);
+const wasm = await WebAssembly.instantiateStreaming(
+      fetch('demo.wasm'),
+      importObject);
+
+//const wasm = await WebAssembly.compile(code);
+
+const instance = wasm.instance //await WebAssembly.instantiate(wasm, {});
+
+const canvas = document.createElement('canvas')
+const gl = canvas.getContext('webgl')
+
+var testa = instance.exports.addTwo(12);
 
 console.log(testa)
+
+//instance.exports.testC();
 
 })();
 
